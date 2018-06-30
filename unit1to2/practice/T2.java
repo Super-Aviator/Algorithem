@@ -1,7 +1,6 @@
-package Unit1.Parctice;
+package unit1to2.practice;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class T2 {
     public static HashMap<Integer, String> map = new HashMap<>();

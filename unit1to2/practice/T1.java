@@ -1,4 +1,4 @@
-package Unit1.Parctice;
+package unit1to2.practice;
 
 import java.util.Arrays;
 
@@ -32,7 +32,7 @@ public class T1 {
 
 /*
 
-package Unit1.Parctice;
+package unit1to2.practice;
 
         import java.util.HashMap;
         import java.util.Map;

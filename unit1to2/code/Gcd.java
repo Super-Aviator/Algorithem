@@ -1,4 +1,4 @@
-package Unit1.Code;
+package unit1to2.code;
 
 /**
  * 计算最大公因子（greatest common divisor）的欧几里得算法！
