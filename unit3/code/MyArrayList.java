@@ -2,6 +2,7 @@ package unit3.code;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class MyArrayList<AnyType> implements Iterable<AnyType> {
     private int size;
@@ -23,6 +24,10 @@ public class MyArrayList<AnyType> implements Iterable<AnyType> {
 
     public int size(){
         return size;
+    }
+
+    public boolean isEmpty(){
+        return size==0;
     }
 
     @SuppressWarnings("unchecked")
@@ -105,6 +110,8 @@ public class MyArrayList<AnyType> implements Iterable<AnyType> {
 
             @Override
             public AnyType next() {
+                if(!hasNext())
+                    throw new NoSuchElementException();
                 return items[current++];
             }
 
@@ -135,7 +142,7 @@ public class MyArrayList<AnyType> implements Iterable<AnyType> {
     }
 
     public static void main(String[] args) {
-        MyArrayList<Integer> m=new MyArrayList();
+        MyArrayList<Integer> m=new MyArrayList<>();
         System.out.println("m.capacity()"+m.capacity());
         m.ensureCapacity(5);
         System.out.println("m.capacity()"+m.capacity());
@@ -150,13 +157,13 @@ public class MyArrayList<AnyType> implements Iterable<AnyType> {
         System.out.println();
 
         m.add(1,100);
-        System.out.println(m);
+        System.out.println(m+" size:"+m.size);
         m.add(20,100);
-        System.out.println(m);
+        System.out.println(m+" size:"+m.size);
         m.remove(1);
-        System.out.println(m);
+        System.out.println(m+" size:"+m.size);
         m.remove(new Integer(100));
-        System.out.println(m);
+        System.out.println(m+" size:"+m.size);
         m.remove(new Integer(3));
         System.out.println(m);
 
