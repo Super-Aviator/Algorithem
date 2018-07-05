@@ -72,6 +72,13 @@ public class MyArrayList<AnyType> implements Iterable<AnyType> {
         size++;
     }
 
+    public boolean contains(AnyType item) {
+        for (AnyType i : this)
+            if (i.equals(item))
+                return true;
+        return false;
+    }
+
     public boolean remove(AnyType val){
         Iterator<AnyType> ite=iterator();
         if(val==null){
@@ -97,6 +104,18 @@ public class MyArrayList<AnyType> implements Iterable<AnyType> {
 
         System.arraycopy(items,index+1,items,index,size-index-1);
         items[--size]=null;
+    }
+
+    public void addAll(Iterable<? extends AnyType> items){
+        for(AnyType item:items)
+            add(item);
+    }
+
+    public void removeAll(Iterable<? extends AnyType> items){
+        for(AnyType i:items){
+            while(contains(i))
+                remove(i);
+        }
     }
 
     @Override
@@ -147,14 +166,17 @@ public class MyArrayList<AnyType> implements Iterable<AnyType> {
         m.ensureCapacity(5);
         System.out.println("m.capacity()"+m.capacity());
 
-        for(int i=0;i<100;i++)
+        for(int i=0;i<10;i++)
             m.add(i);
+
+        m.add(4);
+        m.add(4);
 
         System.out.println("m.size()"+m.size());
         System.out.println("m.capacity()"+m.capacity());
         System.out.println(m);
 
-        System.out.println();
+        /*System.out.println();
 
         m.add(1,100);
         System.out.println(m+" size:"+m.size);
@@ -185,6 +207,15 @@ public class MyArrayList<AnyType> implements Iterable<AnyType> {
             System.out.print(ite.next()+" ");
             ite.remove();
         }
+
+        System.out.println("\n"+m);
+        */
+
+        MyLinkedList<Integer> list2=new MyLinkedList<>();
+        list2.add(2);
+        list2.add(4);
+        list2.add(6);
+        m.removeAll(list2);
 
         System.out.println("\n"+m);
     }

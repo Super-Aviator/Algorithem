@@ -30,9 +30,10 @@ public class MyLinkedList<AnyType> implements Iterable<AnyType> {
          * 这里我错误的将this.next = next;写成了this.next = prev;
          * 导致程序出现了堆栈溢出的错误。自己调试了几个小时才找到原因
          * 细心一点，坤哥。拜托了
-         * @param item
-         * @param prev
-         * @param next
+         *
+         * @param item 想要保存的元素
+         * @param prev 新节点的前一个结点
+         * @param next 新节点的下一个结点
          */
 
         public Node(AnyType item, Node<AnyType> prev, Node<AnyType> next) {
@@ -81,13 +82,14 @@ public class MyLinkedList<AnyType> implements Iterable<AnyType> {
 
     public void add(int index, AnyType item) {
         Node<AnyType> temp = getNode(index);
-        temp.prev.next = temp.prev=new Node<>(item, temp.prev, temp);
+        temp.prev.next = temp.prev = new Node<>(item, temp.prev, temp);
+
         /**
          * 这里等同于:
          * Node<AnyType> newNode=new Node<>(item, temp.prev, temp);
          * temp.prev.next = newNode;
          * temp.prev= newNode;
-         * 奇淫技巧之一
+         * 奇淫技巧
          */
         modCount++;
         thisSize++;
@@ -118,6 +120,13 @@ public class MyLinkedList<AnyType> implements Iterable<AnyType> {
                 temp = temp.prev;
             return temp;
         }
+    }
+
+    public boolean contains(AnyType item) {
+        for (AnyType i : this)
+            if (i.equals(item))
+                return true;
+        return false;
     }
 
     @Override
@@ -174,15 +183,15 @@ public class MyLinkedList<AnyType> implements Iterable<AnyType> {
         StringBuilder sb = new StringBuilder();
         Iterator<AnyType> ite = iterator();
         sb.append("[ ");
-        int i=0;
-        while (++i<13) {
+        int i = 0;
+        while (++i < 13) {
             sb.append(ite.next());
             if (!ite.hasNext())
                 return sb.append(" ]").toString();
             sb.append(" ");
         }
         return sb.toString();
-}
+    }
 
     public static void main(String[] args) {
         MyLinkedList<Integer> list = new MyLinkedList<>();
@@ -193,9 +202,12 @@ public class MyLinkedList<AnyType> implements Iterable<AnyType> {
         System.out.println("list.size() " + list.size() + ":" + list.isEmpty());
         System.out.println("list.get(0) " + list.get(0));
         System.out.println("list.get(1) " + list.get(1));
-        System.out.println("list.set(2,10000) " + list.set(2,10000));
+        System.out.println("list.set(2,10000) " + list.set(2, 10000));
         System.out.println("list.get(3) " + list.get(3));
 
         System.out.println(list + " size() " + list.size());
+
+        System.out.println(list.contains(0));
+        System.out.println(list.contains(10));
     }
 }
